@@ -1,0 +1,178 @@
+/*
+	@modCssClasses
+	@customTag: check-box
+	@cssMod: mod_small
+	--theme-transitionDuration 				0.15s
+	--theme-errorBackgroundColor 			rgba(255, 0, 0, 0.2)
+	--theme-highlightedBackgroundColor 		rgba(0, 0, 0, 0.1)
+	--theme-mainFont 						rgba(0, 0, 0, 1)
+	--theme-linkColor 						rgba(68, 68, 255, 1)
+	--theme-secondaryFont 					rgba(0, 0, 0, 0.6)
+	--theme-discreetBoxShadow 				rgba(0, 0, 0, 0.2)
+	--theme-modalButton-backgroundColor 	rgba(68, 68, 255, 1)
+	--theme-modalButton-color 				rgba(255, 255, 255, 1)
+	--theme-modal-boxShadow 				rgba(0, 0, 0, 1)
+*/
+
+
+
+
+check-box {
+	box-shadow: 0 0 0 1px var(--theme-discreetBoxShadow, rgba(0, 0, 0, 0.2)) inset;
+	background-color: var(--theme-secondaryBackground, rgb(255, 255, 255));
+	display: flex;
+	cursor: pointer;
+	margin-top: 0;
+	margin-right: 0rem;
+	margin-bottom: 4rem;
+	margin-left: 0rem;
+	padding-top: 1rem;
+	padding-right: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 1rem;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	transition-property: background-color, box-shadow;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+	min-height: 4rem;
+	gap: 1rem;
+	align-items: center;
+}
+
+check-box.error {
+	background-color: var(--theme-errorBackgroundColor, rgba(255, 0, 0, 0.2));
+}
+
+check-box:hover, check-box:focus {
+	background-color: var(--theme-highlightedBackgroundColor, rgba(0, 0, 0, 0.1));
+}
+
+check-box.mod_small {
+	min-height: unset;
+}
+
+check-box .title {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+check-box .title .titleElem {
+	color: var(--theme-mainFont, rgba(0, 0, 0, 1));
+	font-weight: 600;
+	transition-property: color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+check-box .title .titleElem a {
+	color: var(--theme-linkColor, rgba(68, 68, 255, 1));
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.25rem;
+}
+
+check-box .title .subtitleElem {
+	color: var(--theme-secondaryFont, rgba(0, 0, 0, 0.6));
+	font-size: 0.8rem;
+	transition-property: color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+check-box .title .subtitleElem b {
+	font-weight: 900;
+	color: var(--theme-mainFont, rgba(0, 0, 0, 1));
+}
+
+check-box .title .subtitleElem a {
+	font-weight: 600;
+	color: var(--theme-linkColor, rgba(68, 68, 255, 1));
+	text-decoration: underline;
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.25rem;
+	transition-property: color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+	outline: none;
+}
+
+check-box .secondaryIcon {
+	min-width: 2.5rem;
+	max-width: 2.5rem;
+	height: 2.5rem;
+	display: flex;
+	justify-content: center;
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	align-items: center;
+}
+
+check-box .secondaryIcon svg {
+	fill: var(--theme-secondaryFont, rgba(0, 0, 0, 0.6));
+	width: 66%;
+	transition-property: fill;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
+
+check-box[data-value="1"] .secondaryIcon svg {
+	fill: var(--theme-mainFont, rgba(0, 0, 0, 1));
+}
+
+check-box .checkbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+check-box .checkbox .slider {
+	display: flex;
+	width: 3.25rem;
+	height: 1.75rem;
+	background-color: var(--theme-discreetBoxShadow, rgba(0, 0, 0, 0.2));
+	border-top-left-radius: 500px;
+	border-top-right-radius: 500px;
+	border-bottom-right-radius: 500px;
+	border-bottom-left-radius: 500px;
+	align-items: center;
+	transition-property: background-color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+	position: relative;
+}
+
+check-box.active .checkbox .slider {
+	background-color: var(--theme-modalButton-backgroundColor, rgba(68, 68, 255, 1));
+}
+
+check-box .checkbox .slider .switch {
+	height: 1.5rem;
+	background-color: var(--theme-modalButton-color, rgba(255, 255, 255, 1));
+	border-top-left-radius: 500px;
+	border-top-right-radius: 500px;
+	border-bottom-right-radius: 500px;
+	border-bottom-left-radius: 500px;
+	width: 1.5rem;
+	position: absolute;
+	top: 0.125rem;
+	left: 0.125rem;
+	transition-property: left, background-color;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+	display: flex;
+	justify-content: center;
+}
+
+check-box.active .checkbox .slider .switch {
+	left: 1.625rem;
+}
+
+check-box .checkbox .slider .switch svg {
+	width: 60%;
+	fill: var(--theme-modal-boxShadow, rgba(0, 0, 0, 1));
+	opacity: 0.6;
+	transition-property: fill;
+	transition-duration: var(--theme-transitionDuration, 0.15s);
+}
