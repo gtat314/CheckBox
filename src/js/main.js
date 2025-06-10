@@ -207,6 +207,15 @@ CheckBox.prototype.loading = function() {
 /**
  * 
  */
+CheckBox.prototype.removeLoading = function() {
+
+    this._switchElem.innerHTML = '';
+
+};
+
+/**
+ * 
+ */
 CheckBox.prototype.success = function() {
 
     this._switchElem.innerHTML = this._iconSuccessSrc;
