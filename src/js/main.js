@@ -25,6 +25,7 @@
  * 
  * @param {Object}                   schema
  * @param {HTMLElement|CSSRule}      schema.parent
+ * @param {Object}                  [schema.dataAttrs]
  * @param {HTMLSourceElement}       [schema.title]
  * @param {Boolean}                 [schema.htmlReady]
  * @param {SVGElement}              [schema.secondaryIcon]
@@ -34,6 +35,7 @@
  * @param {SVGElement}              [schema.iconSuccess]
  * @param {String}                  [schema.value]
  * @param {Function}                [schema.onInput]
+ * @param {Function}                [schema.onClickSecondary]
  * @param {Object[]}                [schema.eventListeners]
  * @param {'input'}                  schema.eventListeners[].type
  * @param {Function}                 schema.eventListeners[].listener
@@ -74,6 +76,13 @@ function CheckBox( schema ) {
      * @private
      */
     this._onInputCallback = null;
+
+    /**
+     * 
+     * @property
+     * @private
+     */
+    this._onClickSecondaryCallback = null;
 
     /**
      * 
@@ -150,6 +159,12 @@ function CheckBox( schema ) {
     if ( schema.hasOwnProperty( 'onInput' ) ) {
 
         this._onInputCallback = schema.onInput;
+
+    }
+
+    if ( schema.hasOwnProperty( 'onClickSecondary' ) ) {
+
+        this._onClickSecondaryCallback = schema.onClickSecondary;
 
     }
 
@@ -302,6 +317,22 @@ CheckBox.prototype._evt_click_checkboxElem = function( evt ) {
 
 /**
  * 
+ * @param {Event} evt 
+ */
+CheckBox.prototype._evt_click_secondaryIcon = function( evt ) {
+
+    if ( this._onClickSecondaryCallback !== null ) {
+
+        evt.stopPropagation();
+
+        this._onClickSecondaryCallback( evt, this );
+
+    }
+
+};
+
+/**
+ * 
  * @private
  * @param {Event} evt 
  */
@@ -388,6 +419,16 @@ CheckBox.prototype._createFromSchema = function( schema ) {
 
     }
 
+    if ( schema.hasOwnProperty( 'dataAttrs' ) ) {
+
+        for ( var attr in schema.dataAttrs ) {
+
+            this._parentElem.setAttribute( 'data-' + attr, schema.dataAttrs[ attr ] );
+
+        }
+
+    }
+
     var titleDivElem = document.createElement( 'DIV' );
     titleDivElem.classList.add( 'title' );
     fragment.appendChild( titleDivElem );
@@ -411,6 +452,17 @@ CheckBox.prototype._createFromSchema = function( schema ) {
         var iconElem = document.createElement( 'DIV' );
         iconElem.classList.add( 'secondaryIcon' );
         iconElem.innerHTML = schema.secondaryIcon;
+        iconElem.addEventListener( 'click', this._evt_click_secondaryIcon.bind( this ) );
+
+        if ( schema.hasOwnProperty( 'dataAttrs' ) ) {
+
+            for ( var attr in schema.dataAttrs ) {
+
+                iconElem.setAttribute( 'data-' + attr, schema.dataAttrs[ attr ] );
+
+            }
+
+        }
 
         fragment.appendChild( iconElem );
 
